@@ -1,7 +1,7 @@
 package com.vigi.graph;
 
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -14,19 +14,28 @@ import static org.junit.Assert.assertThat;
  */
 public class DepthFirstSearchTest {
 
+    private Graph g;
+    private DepthFirstSearch dfs;
+
+    @Before
+    public void setup() {
+        g = initGraph();
+        dfs = new DepthFirstSearch(g, 0);
+    }
+
+    @After
+    public void tearDown() {
+        dfs = null;
+        g = null;
+    }
+
     @Test
     public void path_to() {
-        Graph g = initGraph();
-
-        DepthFirstSearch dfs = new DepthFirstSearch(g, 0);
         assertThat(dfs.pathTo(7).toString(), is("[0, 1, 6, 7]"));
     }
 
     @Test
     public void dfs() {
-        Graph g = initGraph();
-
-        DepthFirstSearch dfs = new DepthFirstSearch(g, 0);
         assertThat(dfs.getDfs(), is(Arrays.asList(0, 1, 6, 7, 2, 3, 5, 4)));
     }
 

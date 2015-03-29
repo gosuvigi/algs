@@ -1,5 +1,7 @@
 package com.vigi.graph;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -9,11 +11,23 @@ import static org.junit.Assert.assertThat;
 
 public class BreadthFirstSearchTest {
 
+    private Graph g;
+    private BreadthFirstSearch bfs;
+
+    @Before
+    public void setup() {
+        g = initGraph();
+        bfs = new BreadthFirstSearch(g, 0);
+    }
+
+    @After
+    public void tearDown() {
+        bfs = null;
+        g = null;
+    }
+
     @Test
     public void testPathTo() throws Exception {
-        Graph g = initGraph();
-        BreadthFirstSearch bfs = new BreadthFirstSearch(g, 0);
-
         assertThat(bfs.getBfs(), is(Arrays.asList(0, 4, 1, 5, 2, 6, 3, 7)));
     }
 
